@@ -18,16 +18,12 @@ public class BookController {
 
 	@Autowired
 	BookMapper bookMapper;
-	
 	@RequestMapping("/showBooks")	
 	public String showBook(Model model,@RequestParam(value="start",defaultValue="0") int start,
 			@RequestParam(value="size",defaultValue="5") int size){	
 		PageHelper.startPage(start, size, "id desc");
-		
 		List<Book> list=bookMapper.showAllBook();
-		
 		PageInfo<Book> page=new PageInfo<>(list);
-		
 		model.addAttribute("page", page);
 		return "showBooks";	
 	}
